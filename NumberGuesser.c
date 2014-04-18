@@ -40,6 +40,9 @@
 #define EASY_MAX 100
 #define MEDIUM_MAX 1000
 #define HARD_MAX 5000
+#define EASY_ATTEMPTS 10
+#define MEDIUM_ATTEMPTS 10
+#define HARD_ATTEMPTS 10
 
 int attempts(void);
 int againstTheClock(void);
@@ -249,6 +252,7 @@ difficulty()
 	int test = scanf(" %c", &selection);
 	if (test != 1) return EXIT_FAILURE;
 	
+	/* Determine difficulty from input, and initialise entropy accordingly */
 	switch (selection) {
 		case 'e':
 		case 'E':
@@ -285,18 +289,21 @@ printHelp()
 	printf("A simple number guessing game.\n\n");
 	printf("There are two gamemodes, attempts and time.\n\n");
 
-	printf("In attempts mode, you are given 10 attempts at guessing the correct number.\n");
+	printf("In attempts mode, you are given a fixed number of attempts at guessing the correct number.\n");
 	printf("Each time you take a guess, you are told whether the actual number is higher\n");
 	printf("or lower. You have unlimited time.\n");
-	printf("If you run out of guesses, the game is over.\n\n");
+	printf("If you run out of guesses, the game is over.\n");
+	printf("Easy: %d attempts\n", EASY_ATTEMPTS);
+	printf("Medium: %d attempts\n\n", MEDIUM_ATTEMPTS);
+	printf("Hard: %d attempts\n\n", HARD_ATTEMPTS);
 
-	printf("In time mode, you are given 25 seconds to guess the correct number.\n");
+	printf("In time mode, you are given %d seconds to guess the correct number.\n", TIMELIMIT);
 	printf("Each time you take a guess, your remaining time is printed\n");
 	printf("You have unlimited guesses.\n");
 	printf("If you run out of time, the game is over.\n\n");
 
 	printf("There are three difficulties: easy, medium and hard\n");
-	printf("In easy mode, the number could be anything from 0-100\n");
-	printf("In medium mode, the number could be anything from 0-1000\n");
-	printf("In hard mode, the number could be anything from 0-5000\n");
+	printf("In easy mode, the number could be anything from 0-%d\n", EASY_MAX);
+	printf("In medium mode, the number could be anything from 0-%d\n", MEDIUM_MAX);
+	printf("In hard mode, the number could be anything from 0-%d\n", HARD_MAX);
 }
