@@ -31,11 +31,16 @@
 #include <time.h>
 
 #define TIMELIMIT 25
-#define ATTEMPTS 10
-#define TIME 20
+#define DIFF_EASY 10
+#define DIFF_MEDIUM 20
+#define DIFF_HARD 30
+#define MODE_ATTEMPTS 10
+#define MODE_TIME 20
 
 int attempts(void);
 int againstTheClock(void);
+int gamemode(void);
+int difficulty(void);
 void success(void);
 void printHelp(void);
 
@@ -52,6 +57,8 @@ static double time_spent;
 int
 main(int argc, char* argv[])
 {
+	int gamemode, difficulty;
+
 	if ((argc > 1) && (strcmp("help", argv[1]) == 0)) {
 		printHelp();
 		return EXIT_SUCCESS;
@@ -63,61 +70,39 @@ main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 
+	/* fetch the gamemode from the user */
+	gamemode = gamemode();
+	if(gamemode == EXIT_FAILURE) {
+		return EXIT_FAILURE;
+	}
+	
+	/* fetch the difficulty from the user */
+	difficulty = difficulty();
+	if(difficulty == EXIT_FAILURE) {
+		return EXIT_FAILURE;
+	}
+	
 	/* Initialise random number generator */
 	srand((unsigned int)(time(NULL)));
 	superSecretNumber = 0;
 	numberWang = 0;
 
-	/*
-	 * Game mode:
-	 * attempts = 10 attempts
-	 * time = 25 seconds
-	 */
-	if (strcmp("attempts", argv[1]) == 0) {
-		result = ATTEMPTS;
-	} else if (strcmp("time", argv[1]) == 0) {
-		result = TIME;
-	} else {
-		printf("%s is not a valid game mode. Please try again.\n", argv[1]);
-		return EXIT_FAILURE;
-	}
-
-	/*
-	 * Difficulty:
-	 * Easy = 0-100
-	 * Medium = 0-1000
-	 * Hard = 0-5000
-	 */
-	if (strcmp("easy", argv[2]) == 0) {
-		superSecretNumber = rand() % 101;
-		numberWang = rand() % 101;
-		printf("Easy Mode: 0-100\n");
-	} else if (strcmp("medium", argv[2]) == 0) {
-		superSecretNumber = rand() % 1001;
-		numberWang = rand() % 1001;
-		printf("Medium Mode: 0-1000\n");
-	} else if (strcmp("hard", argv[2]) == 0) {
-		superSecretNumber = rand() % 5001;
-		numberWang = rand() % 5001;
-		printf("Hard Mode: 0-5000\n");
-	} else {
-		printf("%s is not a valid difficulty. Please try again.\n", argv[2]);
-		return EXIT_FAILURE;
-	}
-
         /* run gamemode based on argument */
-        if (result == ATTEMPTS) {
-		result = attempts();
-        } else if (result == TIME) {
-		result = againstTheClock();
-        } else {
-		return EXIT_FAILURE;
+	switch (gamemode) {
+		MODE_ATTEMPTS:
+			result = attempts();
+		MODE_TIME:
+			result = againstTheClock();
+		default:
+			return EXIT_FAILURE;
 	}
 
 	if (result == 0) {
-		exit(EXIT_SUCCESS);
+		printf("Thankyou for playing");
+		return EXIT_SUCCESS;
 	} else {
-		exit(EXIT_FAILURE);
+		printf("An unknown error occurred");
+		return EXIT_FAILURE;
 	}
 }
 
@@ -218,6 +203,69 @@ againstTheClock()
 
 	success();
 	return EXIT_SUCCESS;
+}
+
+/*
+ * gamemode function
+ * request a gamemode from the user, and run the relevant gamemode function
+ * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
+ */
+int
+gamemode()
+{
+	printf("Choose a gamemode, (a)ttempts or (t)ime\n");
+	char selection = "";
+	int test = scanf("%c", &selection);
+	if (test != 1) return EXIT_FAILURE;
+	
+	switch (selection) {
+		case 'a':
+		case 'A':
+			return MODE_ATTEMPTS;
+		case 't':
+		case 'T':
+			return MODE_TIME;
+	}
+	
+	printf("%c is not a valid gamemode, exiting.\n", selection);
+	return EXIT_FAILURE;
+}
+
+/*
+ * difficulty function
+ * request a difficulty from the user
+ */
+int
+difficulty()
+{
+	printf("Choose a difficulty, (e)asy, (m)edium or (h)ard\n");
+	char selection = "";
+	int test = scanf("%c", &selection);
+	if (test != 1) return EXIT_FAILURE;
+	
+	switch (selection) {
+		case 'e':
+		case 'E':
+			superSecretNumber = rand() % 101;
+			numberWang = rand() % 101;
+			printf("Easy Mode: 0-100\n");
+			return DIFF_EASY;
+		case 'm':
+		case 'M':
+			superSecretNumber = rand() % 1001;
+			numberWang = rand() % 1001;
+			printf("Medium Mode: 0-1000\n");
+			return DIFF_MEDIUM;
+		case 'h':
+		case 'H':
+			superSecretNumber = rand() % 5001;
+			numberWang = rand() % 5001;
+			printf("Hard Mode: 0-5000\n");
+			return DIFF_HARD;
+	}
+	
+	printf("%c is not a valid difficulty, exiting.\n", selection);
+	return EXIT_FALIURE;
 }
 
 /*
