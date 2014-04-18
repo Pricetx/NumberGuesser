@@ -41,8 +41,8 @@
 #define MEDIUM_MAX 1000
 #define HARD_MAX 5000
 #define EASY_ATTEMPTS 10
-#define MEDIUM_ATTEMPTS 10
-#define HARD_ATTEMPTS 10
+#define MEDIUM_ATTEMPTS 15
+#define HARD_ATTEMPTS 25
 
 int play_attempts(void);
 int play_time(void);
