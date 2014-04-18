@@ -62,7 +62,6 @@ main()
 	/* fetch the gamemode from the user */
 	mode = gamemode();
 	if(mode == EXIT_FAILURE) {
-		printf("An unknown error occurred");
 		return EXIT_FAILURE;
 	} else if(mode == MODE_HELP) {
 		printHelp();
@@ -72,7 +71,6 @@ main()
 	/* fetch the difficulty from the user */
 	diff = difficulty();
 	if(diff == EXIT_FAILURE) {
-		printf("An unknown error occurred");
 		return EXIT_FAILURE;
 	}
 	
