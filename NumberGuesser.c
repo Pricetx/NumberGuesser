@@ -44,14 +44,14 @@
 #define MEDIUM_ATTEMPTS 10
 #define HARD_ATTEMPTS 10
 
-int attempts(void);
-int againstTheClock(void);
+int play_attempts(void);
+int play_time(void);
 int gamemode(void);
 int difficulty(void);
-void printHelp(void);
+void print_help(void);
 
 static int answer;
-static int numberWang;
+static int numberwang;
 
 /*
  * Main function, ran on start
@@ -69,7 +69,7 @@ main()
 	if(mode == EXIT_FAILURE) {
 		return EXIT_FAILURE;
 	} else if(mode == MODE_HELP) {
-		printHelp();
+		print_help();
 		return EXIT_SUCCESS;
 	}
 	
@@ -82,10 +82,10 @@ main()
         /* run gamemode based on argument */
 	switch (mode) {
 		case MODE_ATTEMPTS:
-			result = attempts();
+			result = play_attempts();
 			break;
 		case MODE_TIME:
-			result = againstTheClock();
+			result = play_time();
 			break;
 		default:
 			printf("An unknown error occurred\n");
@@ -102,11 +102,11 @@ main()
 }
 
 /*
- * attempts function
+ * play_attempts function
  * Ran when attempts gamemode is selected
  */
 int
-attempts()
+play_attempts()
 {
 	int guess, num_attempts = 1;
 	double time_spent;
@@ -130,7 +130,7 @@ attempts()
 			return EXIT_SUCCESS;
 		}
 
-		if (guess == numberWang) {
+		if (guess == numberwang) {
 			printf("THAT'S NUMBERWANG!\n");
 			return EXIT_SUCCESS;
 		}
@@ -155,11 +155,11 @@ attempts()
 }
 
 /*
- * againstTheClock function
+ * play_time function
  * Ran when time game mode is selected
  */
 int
-againstTheClock()
+play_time()
 {
 	int guess, time_left, num_attempts = 1;
 	double time_spent;
@@ -187,7 +187,7 @@ againstTheClock()
 			return EXIT_SUCCESS;
 		}
 
-		if (guess == numberWang) {
+		if (guess == numberwang) {
 			printf("THAT'S NUMBERWANG!\n");
 			return EXIT_SUCCESS;
 		}
@@ -257,19 +257,19 @@ difficulty()
 		case 'e':
 		case 'E':
 			answer = rand() % (EASY_MAX + 1);
-			numberWang = rand() % (EASY_MAX + 1);
+			numberwang = rand() % (EASY_MAX + 1);
 			printf("Easy Mode: 0-%d\n", EASY_MAX);
 			return DIFF_EASY;
 		case 'm':
 		case 'M':
 			answer = rand() % (MEDIUM_MAX + 1);
-			numberWang = rand() % (MEDIUM_MAX + 1);
+			numberwang = rand() % (MEDIUM_MAX + 1);
 			printf("Medium Mode: 0-%d\n", MEDIUM_MAX);
 			return DIFF_MEDIUM;
 		case 'h':
 		case 'H':
 			answer = rand() % (HARD_MAX + 1);
-			numberWang = rand() % (HARD_MAX + 1);
+			numberwang = rand() % (HARD_MAX + 1);
 			printf("Hard Mode: 0-%d\n", HARD_MAX);
 			return DIFF_HARD;
 	}
@@ -283,13 +283,14 @@ difficulty()
  * ran when the user inputs the help argument
  */
 void
-printHelp()
+print_help()
 {
 	printf("Number Guesser - V1.0\n");
 	printf("A simple number guessing game.\n\n");
 	printf("There are two gamemodes, attempts and time.\n\n");
 
-	printf("In attempts mode, you are given a fixed number of attempts at guessing the correct number.\n");
+	printf("In attempts mode, you are given a fixed number of attempts at guessing the 
+	printf("correct number.\n");
 	printf("Each time you take a guess, you are told whether the actual number is higher\n");
 	printf("or lower. You have unlimited time.\n");
 	printf("If you run out of guesses, the game is over.\n");
