@@ -58,6 +58,9 @@ int
 main()
 {
 	int mode, diff, result;
+	
+	/* Initialise random number generator */
+	srand((unsigned int)(time(NULL)));
 
 	/* fetch the gamemode from the user */
 	mode = gamemode();
@@ -74,10 +77,6 @@ main()
 		return EXIT_FAILURE;
 	}
 	
-	/* Initialise random number generator */
-	srand((unsigned int)(time(NULL)));
-	printf("THE *TOTALLY RANDOM* TIME IS %d", (unsigned int)time(NULL));
-
         /* run gamemode based on argument */
 	switch (mode) {
 		case MODE_ATTEMPTS:
