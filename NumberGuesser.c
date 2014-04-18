@@ -289,7 +289,7 @@ print_help()
 	printf("A simple number guessing game.\n\n");
 	printf("There are two gamemodes, attempts and time.\n\n");
 
-	printf("In attempts mode, you are given a fixed number of attempts at guessing the 
+	printf("In attempts mode, you are given a fixed number of attempts at guessing the ");
 	printf("correct number.\n");
 	printf("Each time you take a guess, you are told whether the actual number is higher\n");
 	printf("or lower. You have unlimited time.\n");
