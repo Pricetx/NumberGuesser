@@ -45,10 +45,9 @@ int attempts(void);
 int againstTheClock(void);
 int gamemode(void);
 int difficulty(void);
-void success(void);
 void printHelp(void);
 
-static int superSecretNumber;
+static int answer;
 static int numberWang;
 
 /*
@@ -118,10 +117,10 @@ attempts()
 	int test = scanf("%d", &guess);
 	if(test != 1) return EXIT_FAILURE;
 
-	while (guess != superSecretNumber) {
+	while (guess != answer) {
 		if (num_attempts >= 10) {
 			printf("Sorry, you ran out of guesses!\n");
-			printf("The number was: %d\n", superSecretNumber);
+			printf("The number was: %d\n", answer);
 			time(&end);
 			time_spent = difftime(end,begin);
 			printf("It took you %d seconds\n", (int)time_spent);
@@ -132,10 +131,10 @@ attempts()
 			printf("THAT'S NUMBERWANG!\n");
 			return EXIT_SUCCESS;
 		}
-		if(guess < superSecretNumber) {
+		if(guess < answer) {
 			printf("Too low, try a higher number: ");
 		}
-		else if(guess > superSecretNumber) {
+		else if(guess > answer) {
 			printf("Too high, try a lower number: ");
 		}
 
@@ -144,7 +143,11 @@ attempts()
 		if(test != 1) return EXIT_FAILURE;
 	}
 
-	success();
+	printf("Correct! The number was: %d\n", answer);
+	printf("It took you %d attempts\n", num_attempts);
+	time(&end);
+	time_spent = difftime(end, begin);
+	printf("It took you %d seconds\n", (int)time_spent);
 	return EXIT_SUCCESS;
 }
 
@@ -155,7 +158,7 @@ attempts()
 int
 againstTheClock()
 {
-	int guess, time_left;
+	int guess, time_left, num_attempts = 1;
 	double time_spent;
 	time_t begin, end;
 
@@ -167,14 +170,14 @@ againstTheClock()
 	/* Read a number in from the keyboard */
 	int test = scanf("%d", &guess);
 	if (test != 1) return EXIT_FAILURE;
-	while (guess != superSecretNumber) {
+	while (guess != answer) {
 		time(&end);
 		time_spent = difftime(end,begin);
 		time_left = TIMELIMIT - (int)time_spent;
 
 		if (time_left <= 0) {
 			printf("Sorry, you ran out of time!\n");
-			printf("The number was: %d\n", superSecretNumber);
+			printf("The number was: %d\n", answer);
 			time(&end);
 			time_spent = difftime(end, begin);
 			printf("It took you %d seconds\n", (int)time_spent);
@@ -186,18 +189,22 @@ againstTheClock()
 			return EXIT_SUCCESS;
 		}
 
-		if (guess < superSecretNumber) {
+		if (guess < answer) {
 			printf("Time Left : %2d | Too low, try a higher number: ", time_left);
-		} else if(guess > superSecretNumber) {
+		} else if(guess > answer) {
 			printf("Time Left : %2d | Too high, try a lower number: ", time_left);
 		}
 
-		numAttempts++;
+		num_attempts++;
 		test = scanf("%d", &guess);
 		if (test != 1) return EXIT_FAILURE;
 	}
 
-	success();
+	printf("Correct! The number was: %d\n", answer);
+	printf("It took you %d attempts\n", num_attempts);
+	time(&end);
+	time_spent = difftime(end, begin);
+	printf("It took you %d seconds\n", (int)time_spent);
 	return EXIT_SUCCESS;
 }
 
@@ -245,19 +252,19 @@ difficulty()
 	switch (selection) {
 		case 'e':
 		case 'E':
-			superSecretNumber = rand() % (EASY_MAX + 1);
+			answer = rand() % (EASY_MAX + 1);
 			numberWang = rand() % (EASY_MAX + 1);
 			printf("Easy Mode: 0-%d\n", EASY_MAX);
 			return DIFF_EASY;
 		case 'm':
 		case 'M':
-			superSecretNumber = rand() % (MEDIUM_MAX + 1);
+			answer = rand() % (MEDIUM_MAX + 1);
 			numberWang = rand() % (MEDIUM_MAX + 1);
 			printf("Medium Mode: 0-%d\n", MEDIUM_MAX);
 			return DIFF_MEDIUM;
 		case 'h':
 		case 'H':
-			superSecretNumber = rand() % (HARD_MAX + 1);
+			answer = rand() % (HARD_MAX + 1);
 			numberWang = rand() % (HARD_MAX + 1);
 			printf("Hard Mode: 0-%d\n", HARD_MAX);
 			return DIFF_HARD;
@@ -265,20 +272,6 @@ difficulty()
 	
 	printf("%c is not a valid difficulty, exiting.\n", selection);
 	return EXIT_FAILURE;
-}
-
-/*
- * Success function
- * ran when the user has won
- */
-void
-success()
-{
-	printf("Correct! The number was: %d\n", superSecretNumber);
-	printf("It took you %d attempts\n", numAttempts);
-	time(&end);
-	time_spent = difftime(end,begin);
-	printf("It took you %d seconds\n", (int)time_spent);
 }
 
 /*
