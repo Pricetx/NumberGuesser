@@ -32,20 +32,6 @@
 
 #include "NumberGuesser.h"
 
-#define TIMELIMIT 25
-#define DIFF_EASY 10
-#define DIFF_MEDIUM 20
-#define DIFF_HARD 30
-#define MODE_ATTEMPTS 10
-#define MODE_TIME 20
-#define MODE_HELP 30
-#define EASY_MAX 100
-#define MEDIUM_MAX 1000
-#define HARD_MAX 5000
-#define EASY_ATTEMPTS 10
-#define MEDIUM_ATTEMPTS 15
-#define HARD_ATTEMPTS 25
-
 int play_attempts(void);
 int play_time(void);
 int gamemode(void);
