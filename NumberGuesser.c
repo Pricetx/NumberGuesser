@@ -86,15 +86,15 @@ main()
 			result = againstTheClock();
 			break;
 		default:
-			printf("An unknown error occurred");
+			printf("An unknown error occurred\n");
 			return EXIT_FAILURE;
 	}
 
 	if (result == 0) {
-		printf("Thankyou for playing");
+		printf("Thankyou for playing\n");
 		return EXIT_SUCCESS;
 	} else {
-		printf("An unknown error occurred");
+		printf("An unknown error occurred\n");
 		return EXIT_FAILURE;
 	}
 }
