@@ -57,7 +57,7 @@ static double time_spent;
 int
 main(int argc, char* argv[])
 {
-	int gamemode, difficulty;
+	int mode, diff;
 
 	if ((argc > 1) && (strcmp("help", argv[1]) == 0)) {
 		printHelp();
@@ -71,13 +71,13 @@ main(int argc, char* argv[])
 	}
 
 	/* fetch the gamemode from the user */
-	gamemode = gamemode();
+	mode = gamemode();
 	if(gamemode == EXIT_FAILURE) {
 		return EXIT_FAILURE;
 	}
 	
 	/* fetch the difficulty from the user */
-	difficulty = difficulty();
+	diff = difficulty();
 	if(difficulty == EXIT_FAILURE) {
 		return EXIT_FAILURE;
 	}
@@ -89,9 +89,9 @@ main(int argc, char* argv[])
 
         /* run gamemode based on argument */
 	switch (gamemode) {
-		MODE_ATTEMPTS:
+		case MODE_ATTEMPTS:
 			result = attempts();
-		MODE_TIME:
+		case MODE_TIME:
 			result = againstTheClock();
 		default:
 			return EXIT_FAILURE;
