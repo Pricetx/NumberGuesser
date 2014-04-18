@@ -66,16 +66,16 @@ main()
 
 	/* fetch the gamemode from the user */
 	mode = gamemode();
-	if(mode == EXIT_FAILURE) {
+	if (mode == EXIT_FAILURE) {
 		return EXIT_FAILURE;
-	} else if(mode == MODE_HELP) {
+	} else if (mode == MODE_HELP) {
 		print_help();
 		return EXIT_SUCCESS;
 	}
 	
 	/* fetch the difficulty from the user */
 	diff = difficulty();
-	if(diff == EXIT_FAILURE) {
+	if (diff == EXIT_FAILURE) {
 		return EXIT_FAILURE;
 	}
 	
@@ -118,7 +118,7 @@ play_attempts()
 	printf("Guess what the secret number is: ");
 	//Read a number in from the keyboard
 	int test = scanf("%d", &guess);
-	if(test != 1) return EXIT_FAILURE;
+	if (test != 1) return EXIT_FAILURE;
 
 	while (guess != answer) {
 		if (num_attempts >= 10) {
@@ -134,16 +134,16 @@ play_attempts()
 			printf("THAT'S NUMBERWANG!\n");
 			return EXIT_SUCCESS;
 		}
-		if(guess < answer) {
+		if (guess < answer) {
 			printf("Too low, try a higher number: ");
 		}
-		else if(guess > answer) {
+		else if (guess > answer) {
 			printf("Too high, try a lower number: ");
 		}
 
 		num_attempts++;
 		test = scanf("%d", &guess);
-		if(test != 1) return EXIT_FAILURE;
+		if (test != 1) return EXIT_FAILURE;
 	}
 
 	printf("Correct! The number was: %d\n", answer);
@@ -279,7 +279,7 @@ difficulty()
 }
 
 /*
- * printHelp function
+ * print_help function
  * ran when the user inputs the help argument
  */
 void
@@ -295,7 +295,7 @@ print_help()
 	printf("or lower. You have unlimited time.\n");
 	printf("If you run out of guesses, the game is over.\n");
 	printf("Easy: %d attempts\n", EASY_ATTEMPTS);
-	printf("Medium: %d attempts\n\n", MEDIUM_ATTEMPTS);
+	printf("Medium: %d attempts\n", MEDIUM_ATTEMPTS);
 	printf("Hard: %d attempts\n\n", HARD_ATTEMPTS);
 
 	printf("In time mode, you are given %d seconds to guess the correct number.\n", TIMELIMIT);
