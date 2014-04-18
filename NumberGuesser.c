@@ -247,6 +247,7 @@ difficulty()
 		case 'e':
 		case 'E':
 			superSecretNumber = rand() % 101;
+			printf("Random Number is: %d", superSecretNumber);
 			numberWang = rand() % 101;
 			printf("Easy Mode: 0-100\n");
 			return DIFF_EASY;
