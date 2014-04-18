@@ -55,7 +55,7 @@ static double time_spent;
  * Main function, ran on start
  */
 int
-main(int argc, char* argv[])
+main()
 {
 	int mode, diff, result;
 
