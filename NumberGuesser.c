@@ -240,7 +240,7 @@ int
 difficulty()
 {
 	printf("Choose a difficulty, (e)asy, (m)edium or (h)ard\n");
-	char selection = "";
+	char selection = '';
 	int test = scanf("%c", &selection);
 	if (test != 1) return EXIT_FAILURE;
 	
@@ -266,7 +266,7 @@ difficulty()
 	}
 	
 	printf("%c is not a valid difficulty, exiting.\n", selection);
-	return EXIT_FALIURE;
+	return EXIT_FAILURE;
 }
 
 /*
