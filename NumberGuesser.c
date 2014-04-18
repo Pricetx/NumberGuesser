@@ -78,8 +78,6 @@ main()
 	
 	/* Initialise random number generator */
 	srand((unsigned int)(time(NULL)));
-	superSecretNumber = 0;
-	numberWang = 0;
 
         /* run gamemode based on argument */
 	switch (mode) {
@@ -247,7 +245,6 @@ difficulty()
 		case 'e':
 		case 'E':
 			superSecretNumber = rand() % 101;
-			printf("Random Number is: %d", superSecretNumber);
 			numberWang = rand() % 101;
 			printf("Easy Mode: 0-100\n");
 			return DIFF_EASY;
