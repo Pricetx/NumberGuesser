@@ -37,6 +37,9 @@
 #define MODE_ATTEMPTS 10
 #define MODE_TIME 20
 #define MODE_HELP 30
+#define EASY_MAX 100
+#define MEDIUM_MAX 1000
+#define HARD_MAX 5000
 
 int attempts(void);
 int againstTheClock(void);
@@ -47,9 +50,8 @@ void printHelp(void);
 
 static int superSecretNumber;
 static int numberWang;
-static int numAttempts = 1;
-static time_t begin, end;
-static double time_spent;
+
+static 
 
 /*
  * Main function, ran on start
@@ -106,7 +108,9 @@ main()
 int
 attempts()
 {
-	int guess;
+	int guess, num_attempts = 1;
+	double time_spent;
+	time_t begin, end;
 
 	//Start the clock
 	time(&begin);
@@ -117,7 +121,7 @@ attempts()
 	if(test != 1) return EXIT_FAILURE;
 
 	while (guess != superSecretNumber) {
-		if (numAttempts >= 10) {
+		if (num_attempts >= 10) {
 			printf("Sorry, you ran out of guesses!\n");
 			printf("The number was: %d\n", superSecretNumber);
 			time(&end);
@@ -137,7 +141,7 @@ attempts()
 			printf("Too high, try a lower number: ");
 		}
 
-		numAttempts++;
+		num_attempts++;
 		test = scanf("%d", &guess);
 		if(test != 1) return EXIT_FAILURE;
 	}
@@ -153,8 +157,8 @@ attempts()
 int
 againstTheClock()
 {
-	int guess;
-	int time_left;
+	int guess, time_left;
+	time_t begin, end;
 
 	/* Start the clock */
 	time(&begin);
@@ -242,21 +246,21 @@ difficulty()
 	switch (selection) {
 		case 'e':
 		case 'E':
-			superSecretNumber = rand() % 101;
-			numberWang = rand() % 101;
-			printf("Easy Mode: 0-100\n");
+			superSecretNumber = rand() % (EASY_MAX + 1);
+			numberWang = rand() % (EASY_MAX + 1);
+			printf("Easy Mode: 0-%d\n", EASY_MAX);
 			return DIFF_EASY;
 		case 'm':
 		case 'M':
-			superSecretNumber = rand() % 1001;
-			numberWang = rand() % 1001;
-			printf("Medium Mode: 0-1000\n");
+			superSecretNumber = rand() % (MEDIUM_MAX + 1);
+			numberWang = rand() % (MEDIUM_MAX + 1);
+			printf("Medium Mode: 0-%d\n", MEDIUM_MAX);
 			return DIFF_MEDIUM;
 		case 'h':
 		case 'H':
-			superSecretNumber = rand() % 5001;
-			numberWang = rand() % 5001;
-			printf("Hard Mode: 0-5000\n");
+			superSecretNumber = rand() % (HARD_MAX + 1);
+			numberWang = rand() % (HARD_MAX + 1);
+			printf("Hard Mode: 0-%d\n", HARD_MAX);
 			return DIFF_HARD;
 	}
 	
