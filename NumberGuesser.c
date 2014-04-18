@@ -30,6 +30,8 @@
 #include <ctype.h>
 #include <time.h>
 
+#include "NumberGuesser.h"
+
 #define TIMELIMIT 25
 #define DIFF_EASY 10
 #define DIFF_MEDIUM 20
