@@ -76,6 +76,7 @@ main()
 	
 	/* Initialise random number generator */
 	srand((unsigned int)(time(NULL)));
+	printf("THE *TOTALLY RANDOM* TIME IS %d", time(NULL));
 
         /* run gamemode based on argument */
 	switch (mode) {
