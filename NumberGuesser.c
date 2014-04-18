@@ -36,6 +36,7 @@
 #define DIFF_HARD 30
 #define MODE_ATTEMPTS 10
 #define MODE_TIME 20
+#define MODE_HELP 30
 
 int attempts(void);
 int againstTheClock(void);
@@ -58,21 +59,13 @@ main(int argc, char* argv[])
 {
 	int mode, diff, result;
 
-	if ((argc > 1) && (strcmp("help", argv[1]) == 0)) {
-		printHelp();
-		return EXIT_SUCCESS;
-	}
-
-	/* Make sure the user specified a difficulty */
-	if (argc != 3) {
-		printf("Usage: %s <attempts|time|help> [easy|medium|hard]\n", argv[0]);
-		return EXIT_FAILURE;
-	}
-
 	/* fetch the gamemode from the user */
 	mode = gamemode();
 	if(mode == EXIT_FAILURE) {
 		return EXIT_FAILURE;
+	} else if(mode == MODE_HELP) {
+		printHelp();
+		return EXIT_SUCCESS;
 	}
 	
 	/* fetch the difficulty from the user */
@@ -214,7 +207,7 @@ againstTheClock()
 int
 gamemode()
 {
-	printf("Choose a gamemode, (a)ttempts or (t)ime\n");
+	printf("Choose a gamemode, (a)ttempts or (t)ime, or view (h)elp\n");
 	char selection;
 	int test = scanf("%c", &selection);
 	if (test != 1) return EXIT_FAILURE;
@@ -226,6 +219,9 @@ gamemode()
 		case 't':
 		case 'T':
 			return MODE_TIME;
+		case 'h':
+		case 'H':
+			return MODE_HELP;
 	}
 	
 	printf("%c is not a valid gamemode, exiting.\n", selection);
