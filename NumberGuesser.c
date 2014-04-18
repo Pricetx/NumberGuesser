@@ -72,13 +72,13 @@ main(int argc, char* argv[])
 
 	/* fetch the gamemode from the user */
 	mode = gamemode();
-	if(gamemode == EXIT_FAILURE) {
+	if(mode == EXIT_FAILURE) {
 		return EXIT_FAILURE;
 	}
 	
 	/* fetch the difficulty from the user */
 	diff = difficulty();
-	if(difficulty == EXIT_FAILURE) {
+	if(diff == EXIT_FAILURE) {
 		return EXIT_FAILURE;
 	}
 	
@@ -88,7 +88,7 @@ main(int argc, char* argv[])
 	numberWang = 0;
 
         /* run gamemode based on argument */
-	switch (gamemode) {
+	switch (mode) {
 		case MODE_ATTEMPTS:
 			result = attempts();
 		case MODE_TIME:
