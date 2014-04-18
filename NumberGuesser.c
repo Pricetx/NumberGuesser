@@ -46,7 +46,6 @@ void printHelp(void);
 
 static int superSecretNumber;
 static int numberWang;
-static int result;
 static int numAttempts = 1;
 static time_t begin, end;
 static double time_spent;
@@ -57,7 +56,7 @@ static double time_spent;
 int
 main(int argc, char* argv[])
 {
-	int mode, diff;
+	int mode, diff, result;
 
 	if ((argc > 1) && (strcmp("help", argv[1]) == 0)) {
 		printHelp();
@@ -91,8 +90,10 @@ main(int argc, char* argv[])
 	switch (mode) {
 		case MODE_ATTEMPTS:
 			result = attempts();
+			break;
 		case MODE_TIME:
 			result = againstTheClock();
+			break;
 		default:
 			return EXIT_FAILURE;
 	}
