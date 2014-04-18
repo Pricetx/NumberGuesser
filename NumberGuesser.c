@@ -156,6 +156,7 @@ int
 againstTheClock()
 {
 	int guess, time_left;
+	double time_spent;
 	time_t begin, end;
 
 	/* Start the clock */
