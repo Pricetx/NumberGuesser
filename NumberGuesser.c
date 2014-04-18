@@ -51,8 +51,6 @@ void printHelp(void);
 static int superSecretNumber;
 static int numberWang;
 
-static 
-
 /*
  * Main function, ran on start
  */
