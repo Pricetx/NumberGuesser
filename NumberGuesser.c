@@ -42,7 +42,9 @@ static int answer;
 static int numberwang;
 
 /*
- * Main function, ran on start
+ * Main function, initialises random, determines gamemode
+ * and difficulty, and executes functions appropriately
+ * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
 int
 main()
@@ -90,8 +92,8 @@ main()
 }
 
 /*
- * play_attempts function
- * Ran when attempts gamemode is selected
+ * attempts mode. Reads input from user and outputs response
+ * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
 int
 play_attempts()
@@ -143,8 +145,8 @@ play_attempts()
 }
 
 /*
- * play_time function
- * Ran when time game mode is selected
+ * time gamemode. Reads input from user and outputs response
+ * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
 int
 play_time()
@@ -200,7 +202,6 @@ play_time()
 }
 
 /*
- * gamemode function
  * request a gamemode from the user, and run the relevant gamemode function
  * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
@@ -231,6 +232,7 @@ gamemode()
 /*
  * difficulty function
  * request a difficulty from the user
+ * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
 int
 difficulty()
