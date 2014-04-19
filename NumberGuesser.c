@@ -83,7 +83,6 @@ main()
 	}
 
 	if (result == 0) {
-		printf("Thankyou for playing\n");
 		return EXIT_SUCCESS;
 	} else {
 		printf("An unknown error occurred\n");
@@ -184,7 +183,7 @@ play_time()
 
 		if (guess < answer) {
 			printf("Time Left : %2d | Too low, try a higher number: ", time_left);
-		} else if(guess > answer) {
+		} else if (guess > answer) {
 			printf("Time Left : %2d | Too high, try a lower number: ", time_left);
 		}
 
