@@ -38,7 +38,7 @@ static int play_time(void);
 static int gamemode(void);
 static int difficulty(void);
 static void print_help(void);
-static void usage(void);
+static void usage(void)  __attribute__((noreturn));
 
 static int answer;
 static int numberwang;
@@ -314,6 +314,6 @@ print_help()
 static void
 usage()
 {
-	fprintf(stderr, "Usage: NumberGuesser [-h | -H]\n");
+	(void)fprintf(stderr, "Usage: NumberGuesser [-h | -H]\n");
 	exit(EXIT_FAILURE);
 }
