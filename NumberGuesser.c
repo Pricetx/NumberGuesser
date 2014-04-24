@@ -53,7 +53,7 @@ main(int argc, char *argv[])
 {
 	int mode, diff, result, ch;
 	
-	while ((ch = getopt(argc, argv, "hH:")) != -1)
+	while ((ch = getopt(argc, argv, "hH:")) != -1) {
 		switch (ch) {
 		case 'h':
 			/* FALLTHROUGH */
