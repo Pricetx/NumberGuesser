@@ -1,4 +1,4 @@
-/*
+/*-
  * Copyright (c) 2014, Jonathan Price
  * All rights reserved.
  *
@@ -32,11 +32,11 @@
 
 #include "NumberGuesser.h"
 
-int play_attempts(void);
-int play_time(void);
-int gamemode(void);
-int difficulty(void);
-void print_help(void);
+static int play_attempts(void);
+static int play_time(void);
+static int gamemode(void);
+static int difficulty(void);
+static void print_help(void);
 
 static int answer;
 static int numberwang;
@@ -65,9 +65,8 @@ main()
 	
 	/* fetch the difficulty from the user */
 	diff = difficulty();
-	if (diff == EXIT_FAILURE) {
+	if (diff == EXIT_FAILURE)
 		return EXIT_FAILURE;
-	}
 	
         /* run gamemode based on argument */
 	switch (mode) {
@@ -94,7 +93,7 @@ main()
  * attempts mode. Reads input from user and outputs response
  * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
-int
+static int
 play_attempts()
 {
 	int guess, num_attempts = 1;
@@ -132,7 +131,8 @@ play_attempts()
 
 		num_attempts++;
 		test = scanf("%d", &guess);
-		if (test != 1) return EXIT_FAILURE;
+		if (test != 1)
+			return EXIT_FAILURE;
 	}
 
 	printf("Correct! The number was: %d\n", answer);
@@ -147,7 +147,7 @@ play_attempts()
  * time gamemode. Reads input from user and outputs response
  * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
-int
+static int
 play_time()
 {
 	int guess, time_left, num_attempts = 1;
@@ -189,7 +189,8 @@ play_time()
 
 		num_attempts++;
 		test = scanf("%d", &guess);
-		if (test != 1) return EXIT_FAILURE;
+		if (test != 1)
+			return EXIT_FAILURE;
 	}
 
 	printf("Correct! The number was: %d\n", answer);
@@ -204,7 +205,7 @@ play_time()
  * request a gamemode from the user, and run the relevant gamemode function
  * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
-int
+static int
 gamemode()
 {
 	printf("Choose a gamemode, (a)ttempts or (t)ime, or view (h)elp\n");
@@ -229,11 +230,10 @@ gamemode()
 }
 
 /*
- * difficulty function
  * request a difficulty from the user
  * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
-int
+static int
 difficulty()
 {
 	printf("Choose a difficulty, (e)asy, (m)edium or (h)ard\n");
@@ -268,10 +268,9 @@ difficulty()
 }
 
 /*
- * print_help function
  * ran when the user inputs the help argument
  */
-void
+static void
 print_help()
 {
 	printf("Number Guesser - V1.0\n");
@@ -296,4 +295,14 @@ print_help()
 	printf("In easy mode, the number could be anything from 0-%d\n", EASY_MAX);
 	printf("In medium mode, the number could be anything from 0-%d\n", MEDIUM_MAX);
 	printf("In hard mode, the number could be anything from 0-%d\n", HARD_MAX);
+}
+
+/*
+ * print usage to stderr
+ */
+static void
+usage()
+{
+	(void)fprintf(stderr, "Usage: NumberGuesser [h]\n");
+	exit(EXIT_FAILURE);
 }
