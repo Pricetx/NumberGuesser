@@ -37,6 +37,7 @@ static int play_time(void);
 static int gamemode(void);
 static int difficulty(void);
 static void print_help(void);
+static void usage(void);
 
 static int answer;
 static int numberwang;
@@ -49,8 +50,17 @@ static int numberwang;
 int
 main()
 {
-	int mode, diff, result;
+	int mode, diff, result, ch;
 	
+	while ((ch = getopt(argc, argv, "hH:")) != -1)
+		switch (ch) {
+		case 'h':
+			/* FALLTHROUGH */
+		case 'H':
+			usage();
+		}
+	}
+
 	/* Initialise random number generator */
 	srand((unsigned int)(time(NULL)));
 
@@ -303,6 +313,6 @@ print_help()
 static void
 usage()
 {
-	(void)fprintf(stderr, "Usage: NumberGuesser [h]\n");
+	(void)fprintf(stderr, "Usage: NumberGuesser [-h | -H]\n");
 	exit(EXIT_FAILURE);
 }
