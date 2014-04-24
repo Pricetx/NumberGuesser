@@ -29,6 +29,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "NumberGuesser.h"
 
@@ -48,7 +49,7 @@ static int numberwang;
  * if an error occurs, return EXIT_FAILURE, else EXIT_SUCCESS
  */
 int
-main()
+main(int argc, char *argv[])
 {
 	int mode, diff, result, ch;
 	
