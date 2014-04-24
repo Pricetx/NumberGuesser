@@ -314,6 +314,6 @@ print_help()
 static void
 usage()
 {
-	(void)fprintf(stderr, "Usage: NumberGuesser [-h | -H]\n");
+	fprintf(stderr, "Usage: NumberGuesser [-h | -H]\n");
 	exit(EXIT_FAILURE);
 }
