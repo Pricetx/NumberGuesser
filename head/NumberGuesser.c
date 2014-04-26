@@ -88,15 +88,15 @@ main(int argc, char *argv[])
 			result = play_time();
 			break;
 		default:
-			printf("An unknown error occurred\n");
-			return EXIT_FAILURE;
+			fprintf(stderr, "An unknown error occurred\n");
+			exit(EXIT_FAILURE);
 	}
 
 	if (result == 0) {
 		return EXIT_SUCCESS;
 	} else {
-		printf("An unknown error occurred\n");
-		return EXIT_FAILURE;
+		fprintf(stderr, "An unknown error occurred\n");
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -132,11 +132,9 @@ play_attempts()
 		if (guess == numberwang) {
 			printf("THAT'S NUMBERWANG!\n");
 			return EXIT_SUCCESS;
-		}
-		if (guess < answer) {
+		} if (guess < answer) {
 			printf("Too low, try a higher number: ");
-		}
-		else if (guess > answer) {
+		} else if (guess > answer) {
 			printf("Too high, try a lower number: ");
 		}
 
@@ -172,7 +170,8 @@ play_time()
 
 	/* Read a number in from the keyboard */
 	int test = scanf("%d", &guess);
-	if (test != 1) return EXIT_FAILURE;
+	if (test != 1)
+		return EXIT_FAILURE;
 	while (guess != answer) {
 		time(&end);
 		time_spent = difftime(end,begin);
@@ -236,8 +235,8 @@ gamemode()
 			return MODE_HELP;
 	}
 	
-	printf("%c is not a valid gamemode, exiting.\n", selection);
-	return EXIT_FAILURE;
+	fprintf(stderr, "%c is not a valid gamemode, exiting.\n", selection);
+	exit(EXIT_FAILURE);
 }
 
 /*
@@ -250,7 +249,8 @@ difficulty()
 	printf("Choose a difficulty, (e)asy, (m)edium or (h)ard\n");
 	char selection;
 	int test = scanf(" %c", &selection);
-	if (test != 1) return EXIT_FAILURE;
+	if (test != 1)
+		return EXIT_FAILURE;
 	
 	/* Determine difficulty from input, and initialise entropy accordingly */
 	switch (selection) {
@@ -274,8 +274,8 @@ difficulty()
 			return DIFF_HARD;
 	}
 	
-	printf("%c is not a valid difficulty, exiting.\n", selection);
-	return EXIT_FAILURE;
+	fprintf(stderr, "%c is not a valid difficulty, exiting.\n", selection);
+	exit(EXIT_FAILURE);
 }
 
 /*
