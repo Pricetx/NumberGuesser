@@ -29,7 +29,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-#include <unistd.h>
+#include <getopt.h>
 
 #include "NumberGuesser.h"
 
