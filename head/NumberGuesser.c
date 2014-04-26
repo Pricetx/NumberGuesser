@@ -37,11 +37,12 @@ static int play_attempts(void);
 static int play_time(void);
 static int gamemode(void);
 static int difficulty(void);
+static int write_highscore(int, int, int, int);
 static void print_help(void);
 static void usage(void)  __attribute__((noreturn));
 
-static int answer;
-static int numberwang;
+static int answer, numberwang, num_attempts;
+static double time_spent;
 
 /*
  * Main function, initialises random, determines gamemode
@@ -96,6 +97,8 @@ main(int argc, char *argv[])
 	}
 
 	if (result == 0) {
+		/* Write score to a file */
+		write_highscore(mode, diff, num_attempts, time_spent);
 		return EXIT_SUCCESS;
 	} else {
 		fprintf(stderr, "An unknown error occurred\n");
@@ -110,9 +113,10 @@ main(int argc, char *argv[])
 static int
 play_attempts()
 {
-	int guess, num_attempts = 1;
-	double time_spent;
+	int guess;
 	time_t begin, end;
+
+	num_attempts = 1;
 
 	//Start the clock
 	time(&begin);
@@ -162,9 +166,10 @@ play_attempts()
 static int
 play_time()
 {
-	int guess, time_left, num_attempts = 1;
-	double time_spent;
+	int guess, time_left;
 	time_t begin, end;
+
+	num_attempts = 1;
 
 	/* Start the clock */
 	time(&begin);
@@ -279,6 +284,22 @@ difficulty()
 	
 	fprintf(stderr, "%c is not a valid difficulty, exiting.\n", selection);
 	exit(EXIT_FAILURE);
+}
+
+/*
+ * write score to a file
+ */
+static int
+write_highscore(int gamemode, int diff, int attempts, int time)
+{
+	FILE *fp = fopen("scores.dat", "a");
+	if (f == NULL) {
+		fprintf(stderr, "Error opening file\n");
+		exit(EXIT_ERROR);
+	}
+
+	fprintf(fp, "%d, %d, %d, %d", gamemode, diff, attempts, time);
+	fclose(fp);
 }
 
 /*
