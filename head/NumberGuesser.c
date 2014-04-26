@@ -37,7 +37,7 @@ static int play_attempts(void);
 static int play_time(void);
 static int gamemode(void);
 static int difficulty(void);
-static int write_highscore(int, int, int, int);
+static void write_highscore(int, int, int, int);
 static void print_help(void);
 static void usage(void)  __attribute__((noreturn));
 
@@ -289,7 +289,7 @@ difficulty()
 /*
  * write score to a file
  */
-static int
+static void
 write_highscore(int gamemode, int diff, int attempts, int time)
 {
 	FILE *fp = fopen("scores.dat", "a");
