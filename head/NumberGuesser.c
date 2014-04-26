@@ -298,7 +298,7 @@ write_highscore(int gamemode, int diff, int attempts, int time)
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(fp, "%d, %d, %d, %d", gamemode, diff, attempts, time);
+	fprintf(fp, "%d, %d, %d, %d\n", gamemode, diff, attempts, time);
 	fclose(fp);
 }
 
