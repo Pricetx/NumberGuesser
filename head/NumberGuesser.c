@@ -98,7 +98,7 @@ main(int argc, char *argv[])
 
 	if (result == 0) {
 		/* Write score to a file */
-		write_highscore(mode, diff, num_attempts, time_spent);
+		write_highscore(mode, diff, num_attempts, (int)time_spent);
 		return EXIT_SUCCESS;
 	} else {
 		fprintf(stderr, "An unknown error occurred\n");
@@ -293,9 +293,9 @@ static int
 write_highscore(int gamemode, int diff, int attempts, int time)
 {
 	FILE *fp = fopen("scores.dat", "a");
-	if (f == NULL) {
+	if (fp == NULL) {
 		fprintf(stderr, "Error opening file\n");
-		exit(EXIT_ERROR);
+		exit(EXIT_FAILURE);
 	}
 
 	fprintf(fp, "%d, %d, %d, %d", gamemode, diff, attempts, time);
