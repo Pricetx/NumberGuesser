@@ -59,6 +59,7 @@ main(int argc, char *argv[])
 			/* FALLTHROUGH */
 		case 'H':
 			print_help();
+			break;
 		default:
 			usage();
 		}
